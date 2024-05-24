@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Diagramas a partir de texto</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true
+        });
+    </script>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-10 m-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <strong>DIAGRAMA DE GESTOR DE GASTOS PERSONALES (PIM)</strong>
+                </div>
+                <div class="card-body">
+                  
+
+                    <div class="mermaid">
+                        classDiagram
+                        class Usuario {
+                        + nombre: string
+                        + correoElectronico: string
+                        + contraseña: string
+                        + saldo: float
+                        + ingresarGasto(monto: float): void
+                        + ingresarIngreso(monto: float): void
+                        + verHistorialGastos(): void
+                        + verBalance(): void
+                        }
+
+                        class Gasto {
+                        + id: int
+                        + fecha: Date
+                        + monto: float
+                        + categoria: string
+                        + descripcion: string
+                        }
+
+                        class Ingreso {
+                        + id: int
+                        + fecha: Date
+                        + monto: float
+                        + fuente: string
+                        + descripcion: string
+                        }
+
+                        class CategoriaGasto {
+                        + nombre: string
+                        + descripcion: string
+                        }
+
+                        Usuario "1" *-- "*" Gasto
+                        Usuario "1" *-- "*" Ingreso
+                        Gasto "1" *-- "1" CategoriaGasto
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
