@@ -30,7 +30,7 @@
                         class Usuario {
                         + nombre: string
                         + correoElectronico: string
-                        + contraseña: string
+                        + contrasenia: string
                         + saldo: float
                         + ingresarGasto(monto: float): void
                         + ingresarIngreso(monto: float): void
@@ -39,15 +39,12 @@
                         }
 
                         class Gasto {
-                        + id: int
                         + fecha: Date
                         + monto: float
-                        + categoria: string
                         + descripcion: string
                         }
 
                         class Ingreso {
-                        + id: int
                         + fecha: Date
                         + monto: float
                         + fuente: string
@@ -59,9 +56,9 @@
                         + descripcion: string
                         }
 
-                        Usuario "1" *-- "*" Gasto
-                        Usuario "1" *-- "*" Ingreso
-                        Gasto "1" *-- "1" CategoriaGasto
+                        Usuario "1" *-- "0..*" Gasto
+                        Usuario "1" *-- "0..*" Ingreso
+                        CategoriaGasto "1" *-- "0..*" Gasto
 
 
                     </div>

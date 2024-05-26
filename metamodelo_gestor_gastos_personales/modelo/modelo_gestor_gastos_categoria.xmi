@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetamodeladoGestorGastosPersonales:CategoriaGasto
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:MetamodeladoGestorGastosPersonales="http://gestor-gastos-personales.ecore"
+    xsi:schemaLocation="http://gestor-gastos-personales.ecore ../metamodelado/metamodelo_simplificado.ecore"
+    nombre="Alimentacion"
+    descripcion="Gastos de alimentacion">
+  <gasto fecha="2024-05-03T00:00:00.000-0500"
+      monto="65.75"
+      descripcion="Compra supermaxi"/>
+  <gasto fecha="2024-05-06T00:00:00.000-0500"
+      monto="45.3"
+      descripcion="Compra Tia"/>
+</MetamodeladoGestorGastosPersonales:CategoriaGasto>

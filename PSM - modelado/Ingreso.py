@@ -1,7 +1,7 @@
 #PLEASE DO NOT EDIT THIS CODE
 #This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!
-# line 27 "model.ump"
-# line 58 "model.ump"
+# line 29 "model.ump"
+# line 59 "model.ump"
 import os
 
 class Ingreso():
@@ -13,14 +13,12 @@ class Ingreso():
     #------------------------
     # CONSTRUCTOR
     #------------------------
-    def __init__(self, aId, aFecha, aMonto, aFuente, aDescripcion, aUsuario):
+    def __init__(self, aFecha, aMonto, aFuente, aDescripcion, aUsuario):
         self._usuario = None
         self._descripcion = None
         self._fuente = None
         self._monto = None
         self._fecha = None
-        self._id = None
-        self._id = aId
         self._fecha = aFecha
         self._monto = aMonto
         self._fuente = aFuente
@@ -32,12 +30,6 @@ class Ingreso():
     #------------------------
     # INTERFACE
     #------------------------
-    def setId(self, aId):
-        wasSet = False
-        self._id = aId
-        wasSet = True
-        return wasSet
-
     def setFecha(self, aFecha):
         wasSet = False
         self._fecha = aFecha
@@ -61,9 +53,6 @@ class Ingreso():
         self._descripcion = aDescripcion
         wasSet = True
         return wasSet
-
-    def getId(self):
-        return self._id
 
     def getFecha(self):
         return self._fecha
@@ -101,4 +90,5 @@ class Ingreso():
             placeholderUsuario.removeIngreso(self)
 
     def __str__(self):
-        return str(super().__str__()) + "[" + "id" + ":" + str(self.getId()) + "," + "monto" + ":" + str(self.getMonto()) + "," + "fuente" + ":" + str(self.getFuente()) + "," + "descripcion" + ":" + str(self.getDescripcion()) + "]" + str(os.linesep) + "  " + "fecha" + "=" + str((((self.getFecha().__str__().replaceAll("  ", "    ")) if not self.getFecha() == self else "this") if not (self.getFecha() is None) else "null")) + str(os.linesep) + "  " + "usuario = " + ((format(id(self.getUsuario()), "x")) if not (self.getUsuario() is None) else "null")
+        return str(super().__str__()) + "[" + "monto" + ":" + str(self.getMonto()) + "," + "fuente" + ":" + str(self.getFuente()) + "," + "descripcion" + ":" + str(self.getDescripcion()) + "]" + str(os.linesep) + "  " + "fecha" + "=" + str((((self.getFecha().__str__().replaceAll("  ", "    ")) if not self.getFecha() == self else "this") if not (self.getFecha() is None) else "null")) + str(os.linesep) + "  " + "usuario = " + ((format(id(self.getUsuario()), "x")) if not (self.getUsuario() is None) else "null")
+

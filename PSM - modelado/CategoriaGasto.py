@@ -2,7 +2,6 @@
 #This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!
 # line 36 "model.ump"
 # line 64 "model.ump"
-import os
 
 class CategoriaGasto():
     #------------------------
@@ -13,27 +12,13 @@ class CategoriaGasto():
     #------------------------
     # CONSTRUCTOR
     #------------------------
-    @classmethod
-    def alternateConstructor(cls, aNombre, aDescripcion, aGasto):
-        self = cls.__new__(cls)
-        self._gasto = None
+    def __init__(self, aNombre, aDescripcion):
+        self._gastos = None
         self._descripcion = None
         self._nombre = None
         self._nombre = aNombre
         self._descripcion = aDescripcion
-        if aGasto is None or not (aGasto.getCategoriaGasto() is None) :
-            raise RuntimeError ("Unable to create CategoriaGasto due to aGasto. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html")
-        self._gasto = aGasto
-        return self
-
-    def __init__(self, aNombre, aDescripcion, aIdForGasto, aFechaForGasto, aMontoForGasto, aCategoriaForGasto, aDescripcionForGasto, aUsuarioForGasto):
-        from Gasto import Gasto
-        self._gasto = None
-        self._descripcion = None
-        self._nombre = None
-        self._nombre = aNombre
-        self._descripcion = aDescripcion
-        self._gasto = Gasto.alternateConstructor(aIdForGasto, aFechaForGasto, aMontoForGasto, aCategoriaForGasto, aDescripcionForGasto, self, aUsuarioForGasto)
+        self._gastos = []
 
     #------------------------
     # INTERFACE
@@ -56,19 +41,100 @@ class CategoriaGasto():
     def getDescripcion(self):
         return self._descripcion
 
-    # Code from template association_GetOne 
-    def getGasto(self):
-        return self._gasto
+    # Code from template association_GetMany 
+    def getGasto(self, index):
+        aGasto = self._gastos[index]
+        return aGasto
+
+    def getGastos(self):
+        newGastos = tuple(self._gastos)
+        return newGastos
+
+    def numberOfGastos(self):
+        number = len(self._gastos)
+        return number
+
+    def hasGastos(self):
+        has = len(self._gastos) > 0
+        return has
+
+    def indexOfGasto(self, aGasto):
+        index = (-1 if not aGasto in self._gastos else self._gastos.index(aGasto))
+        return index
+
+    # Code from template association_MinimumNumberOfMethod 
+    @staticmethod
+    def minimumNumberOfGastos():
+        return 0
+
+    # Code from template association_AddManyToOne 
+    def addGasto1(self, aFecha, aMonto, aDescripcion, aUsuario):
+        from Gasto import Gasto
+        return Gasto(aFecha, aMonto, aDescripcion, aUsuario, self)
+
+    def addGasto2(self, aGasto):
+        wasAdded = False
+        if (aGasto) in self._gastos :
+            return False
+        existingCategoriaGasto = aGasto.getCategoriaGasto()
+        isNewCategoriaGasto = not (existingCategoriaGasto is None) and not self == existingCategoriaGasto
+        if isNewCategoriaGasto :
+            aGasto.setCategoriaGasto(self)
+        else :
+            self._gastos.append(aGasto)
+        wasAdded = True
+        return wasAdded
+
+    def removeGasto(self, aGasto):
+        wasRemoved = False
+        #Unable to remove aGasto, as it must always have a categoriaGasto
+        if not self == aGasto.getCategoriaGasto() :
+            self._gastos.remove(aGasto)
+            wasRemoved = True
+        return wasRemoved
+
+    # Code from template association_AddIndexControlFunctions 
+    def addGastoAt(self, aGasto, index):
+        wasAdded = False
+        if self.addGasto(aGasto) :
+            if index < 0 :
+                index = 0
+            if index > self.numberOfGastos() :
+                index = self.numberOfGastos() - 1
+            self._gastos.remove(aGasto)
+            self._gastos.insert(index, aGasto)
+            wasAdded = True
+        return wasAdded
+
+    def addOrMoveGastoAt(self, aGasto, index):
+        wasAdded = False
+        if (aGasto) in self._gastos :
+            if index < 0 :
+                index = 0
+            if index > self.numberOfGastos() :
+                index = self.numberOfGastos() - 1
+            self._gastos.remove(aGasto)
+            self._gastos.insert(index, aGasto)
+            wasAdded = True
+        else :
+            wasAdded = self.addGastoAt(aGasto, index)
+        return wasAdded
 
     def delete(self):
-        existingGasto = self._gasto
-        self._gasto = None
-        if not (existingGasto is None) :
-            existingGasto.delete()
+        i = len(self._gastos)
+        while i > 0 :
+            aGasto = self._gastos[i - 1]
+            aGasto.delete()
+            i -= 1
 
     def __str__(self):
-        return str(super().__str__()) + "[" + "nombre" + ":" + str(self.getNombre()) + "," + "descripcion" + ":" + str(self.getDescripcion()) + "]" + str(os.linesep) + "  " + "gasto = " + ((format(id(self.getGasto()), "x")) if not (self.getGasto() is None) else "null")
+        return str(super().__str__()) + "[" + "nombre" + ":" + str(self.getNombre()) + "," + "descripcion" + ":" + str(self.getDescripcion()) + "]"
 
-
-
+    def addGasto(self, *argv):
+        from Gasto import Gasto
+        if len(argv) == 4 and isinstance(argv[0], Date) and isinstance(argv[1], (float, int)) and isinstance(argv[2], str) and isinstance(argv[3], Usuario) :
+            return self.addGasto1(argv[0], argv[1], argv[2], argv[3])
+        if len(argv) == 1 and isinstance(argv[0], Gasto) :
+            return self.addGasto2(argv[0])
+        raise TypeError("No method matches provided parameters")
 

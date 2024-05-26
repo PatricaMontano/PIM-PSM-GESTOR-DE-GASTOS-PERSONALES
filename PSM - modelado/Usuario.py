@@ -1,7 +1,7 @@
 #PLEASE DO NOT EDIT THIS CODE
 #This code was generated using the UMPLE 1.33.0.6934.a386b0a58 modeling language!
 # line 2 "model.ump"
-# line 45 "model.ump"
+# line 47 "model.ump"
 
 class Usuario():
     #------------------------
@@ -12,16 +12,16 @@ class Usuario():
     #------------------------
     # CONSTRUCTOR
     #------------------------
-    def __init__(self, aNombre, aCorreoElectronico, aContrasena, aSaldo):
+    def __init__(self, aNombre, aCorreoElectronico, aContrasenia, aSaldo):
         self._ingresos = None
         self._gastos = None
         self._saldo = None
-        self._contrasena = None
+        self._contrasenia = None
         self._correoElectronico = None
         self._nombre = None
         self._nombre = aNombre
         self._correoElectronico = aCorreoElectronico
-        self._contrasena = aContrasena
+        self._contrasenia = aContrasenia
         self._saldo = aSaldo
         self._gastos = []
         self._ingresos = []
@@ -41,9 +41,9 @@ class Usuario():
         wasSet = True
         return wasSet
 
-    def setContrasena(self, aContrasena):
+    def setContrasenia(self, aContrasenia):
         wasSet = False
-        self._contrasena = aContrasena
+        self._contrasenia = aContrasenia
         wasSet = True
         return wasSet
 
@@ -59,8 +59,8 @@ class Usuario():
     def getCorreoElectronico(self):
         return self._correoElectronico
 
-    def getContrasena(self):
-        return self._contrasena
+    def getContrasenia(self):
+        return self._contrasenia
 
     def getSaldo(self):
         return self._saldo
@@ -113,9 +113,9 @@ class Usuario():
         return 0
 
     # Code from template association_AddManyToOne 
-    def addGasto1(self, aId, aFecha, aMonto, aCategoria, aDescripcion, aCategoriaGasto):
+    def addGasto1(self, aFecha, aMonto, aDescripcion, aCategoriaGasto):
         from Gasto import Gasto
-        return Gasto(aId, aFecha, aMonto, aCategoria, aDescripcion, aCategoriaGasto, self)
+        return Gasto(aFecha, aMonto, aDescripcion, self, aCategoriaGasto)
 
     def addGasto2(self, aGasto):
         wasAdded = False
@@ -171,9 +171,9 @@ class Usuario():
         return 0
 
     # Code from template association_AddManyToOne 
-    def addIngreso1(self, aId, aFecha, aMonto, aFuente, aDescripcion):
+    def addIngreso1(self, aFecha, aMonto, aFuente, aDescripcion):
         from Ingreso import Ingreso
-        return Ingreso(aId, aFecha, aMonto, aFuente, aDescripcion, self)
+        return Ingreso(aFecha, aMonto, aFuente, aDescripcion, self)
 
     def addIngreso2(self, aIngreso):
         wasAdded = False
@@ -236,42 +236,38 @@ class Usuario():
             aIngreso.delete()
             i -= 1
 
-    # line 8 "model.ump"
+    # line 9 "model.ump"
     def ingresarGasto(self, monto):
         print()
-        
 
-    # line 9 "model.ump"
+    # line 12 "model.ump"
     def ingresarIngreso(self, monto):
         print()
 
-    # line 10 "model.ump"
+    # line 15 "model.ump"
     def verHistorialGastos(self):
         print()
 
-    # line 11 "model.ump"
+    # line 18 "model.ump"
     def verBalance(self):
         print()
 
     def __str__(self):
-        return str(super().__str__()) + "[" + "nombre" + ":" + str(self.getNombre()) + "," + "correoElectronico" + ":" + str(self.getCorreoElectronico()) + "," + "contrasena" + ":" + str(self.getContrasena()) + "," + "saldo" + ":" + str(self.getSaldo()) + "]"
+        return str(super().__str__()) + "[" + "nombre" + ":" + str(self.getNombre()) + "," + "correoElectronico" + ":" + str(self.getCorreoElectronico()) + "," + "contrasenia" + ":" + str(self.getContrasenia()) + "," + "saldo" + ":" + str(self.getSaldo()) + "]"
 
     def addGasto(self, *argv):
         from Gasto import Gasto
-        if len(argv) == 6 and isinstance(argv[0], int) and isinstance(argv[1], Date) and isinstance(argv[2], (float, int)) and isinstance(argv[3], str) and isinstance(argv[4], str) and isinstance(argv[5], CategoriaGasto) :
-            return self.addGasto1(argv[0], argv[1], argv[2], argv[3], argv[4], argv[5])
+        if len(argv) == 4 and isinstance(argv[0], Date) and isinstance(argv[1], (float, int)) and isinstance(argv[2], str) and isinstance(argv[3], CategoriaGasto) :
+            return self.addGasto1(argv[0], argv[1], argv[2], argv[3])
         if len(argv) == 1 and isinstance(argv[0], Gasto) :
             return self.addGasto2(argv[0])
         raise TypeError("No method matches provided parameters")
 
     def addIngreso(self, *argv):
         from Ingreso import Ingreso
-        if len(argv) == 5 and isinstance(argv[0], int) and isinstance(argv[1], Date) and isinstance(argv[2], (float, int)) and isinstance(argv[3], str) and isinstance(argv[4], str) :
-            return self.addIngreso1(argv[0], argv[1], argv[2], argv[3], argv[4])
+        if len(argv) == 4 and isinstance(argv[0], Date) and isinstance(argv[1], (float, int)) and isinstance(argv[2], str) and isinstance(argv[3], str) :
+            return self.addIngreso1(argv[0], argv[1], argv[2], argv[3])
         if len(argv) == 1 and isinstance(argv[0], Ingreso) :
             return self.addIngreso2(argv[0])
         raise TypeError("No method matches provided parameters")
-
-
-
 

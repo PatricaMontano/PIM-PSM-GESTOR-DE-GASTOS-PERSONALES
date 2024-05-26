@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetamodeladoGestorGastosPersonales:Usuario
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:MetamodeladoGestorGastosPersonales="http://gestor-gastos-personales.ecore"
+    xsi:schemaLocation="http://gestor-gastos-personales.ecore ../metamodelado/metamodelo_simplificado.ecore"
+    nombre="Johanna Montanio"
+    correo="joha@gmail.com"
+    contrasenia="12345678"
+    saldo="450.6">
+  <gasto fecha="2024-05-01T00:00:00.000-0500"
+      monto="101.56"
+      descripcion="Comida del mes"/>
+  <gasto fecha="2024-05-05T00:00:00.000-0500"
+      monto="40.85"
+      descripcion="Servicios basicos"/>
+  <ingreso fecha="2024-05-01T00:00:00.000-0500"
+      monto="950.0"
+      fuente="Trabajo"
+      descripcion="Sueldo del mes"/>
+  <ingreso fecha="2024-05-20T00:00:00.000-0500"
+      monto="150.26"
+      fuente="Extras"
+      descripcion="Horas extras"/>
+</MetamodeladoGestorGastosPersonales:Usuario>
